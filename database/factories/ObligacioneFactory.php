@@ -21,11 +21,11 @@ class ObligacioneFactory extends Factory
     public function definition(): array
     {
         $dias = [
-            'Lunes' => ['cantidad' => $this->faker->numberBetween($min=0, $max=6)],
-            'Martes' => ['cantidad' => $this->faker->numberBetween($min=0, $max=6)],
-            'Miércoles' => ['cantidad' => $this->faker->numberBetween($min=0, $max=6)],
-            'Jueves' => ['cantidad' => $this->faker->numberBetween($min=0, $max=6)],
-            'Viernes' => ['cantidad' => $this->faker->numberBetween($min=0, $max=6)],
+            'Lunes' => $this->faker->numberBetween($min=0, $max=6),
+            'Martes' =>$this->faker->numberBetween($min=0, $max=6),
+            'Miércoles' => $this->faker->numberBetween($min=0, $max=6),
+            'Jueves' => $this->faker->numberBetween($min=0, $max=6),
+            'Viernes' => $this->faker->numberBetween($min=0, $max=6),
         ];
         $diasJSON=json_encode($dias);
         return [
