@@ -20,8 +20,8 @@ return new class extends Migration
             $table->char('postfixCUIL',1);
             $table->date('fnacimiento');
             $table->string('lnacimiento');
-            $table->string('localidad');
             $table->string('domicilio');
+            $table->string('direccion');
             $table->enum('estadoCivil',['Soltero/a','Casado/a','Divorciado/a','Viudo/a']);
             $table->date('finicioDocencia');
             $table->string('titulo1');

@@ -23,9 +23,9 @@ class DatabaseSeeder extends Seeder
         $this->call(EspacioSeeder::class);
 
         //Factories
-        Docente::factory(10)->create();
-        Obligacione::factory(25)->create();
-        Licencia::factory(25)->create();
+        Docente::factory(200)->create();
+        Obligacione::factory(200)->create();
+        Licencia::factory(200)->create();
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([

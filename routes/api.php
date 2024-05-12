@@ -28,6 +28,8 @@ Route::middleware(['auth:sanctum'])->group(function(){
     Route::get('articulos',[ArticuloController::class,'index']);
     Route::get('espacios',[EspacioController::class,'index']);
     Route::apiResource('docentes',DocenteController::class);
+    Route::get('docentes/search/{value}',[DocenteController::class,'search'])->name('docentes.search');
+
     Route::apiResource('obligaciones',ObligacioneController::class);
     Route::apiResource('licencias',LicenciaController::class);
 });

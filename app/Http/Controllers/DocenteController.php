@@ -11,15 +11,25 @@ class DocenteController extends Controller
    
     public function index()
     {
-        $docentes=Docente::paginate(10);
+        $docentes=Docente::orderBy('apellidos','ASC')->paginate(8);
         return response()->json([
             'state'=>true,
             'data'=>$docentes,
         ],200);
     }
 
+    public function search($value){
+        $docentes=Docente::where('apellidos','like','%'.$value.'%')->orWhere('nombres','like','%'.$value.'%')->orWhere('dni','like','%'.$value.'%')->paginate(8);
+        
+        return response()->json([
+            'state'=>true,
+            'data'=>$docentes,
+        ],200);
+
+    }
+
   
-    public function store(Request $request)
+    public function store(Request  $request)
     {
         $request->validate([
             'apellidos'=>'required|string|max:100',
@@ -29,8 +39,8 @@ class DocenteController extends Controller
             'postfixCUIL'=>'required|integer|min:0|max:9',
             'lnacimiento'=>'required|string|max:100',
             'fnacimiento'=>'required|date',
-            'localidad'=>'required|string|max:100',
             'domicilio'=>'required|string|max:100',
+            'direccion'=>'required|string|max:100',
             'estadoCivil'=>'required|string|max:100',
             'finicioDocencia'=>'required|date',
             'titulo1'=>'required|string|max:300',
@@ -38,11 +48,12 @@ class DocenteController extends Controller
             'email'=>'required|email',
             'tel'=>'required|string|max:100',
         ]);
+        
+        
         Docente::create($request->all());
-
-        return response()->json([
-            'state'=>true
-        ],200);
+            return response()->json([
+                'state'=>true
+            ],200);
     }
 
 
@@ -70,8 +81,8 @@ class DocenteController extends Controller
             'postfixCUIL'=>'required|integer|min:0|max:9',
             'lnacimiento'=>'required|string|max:100',
             'fnacimiento'=>'required|date',
-            'localidad'=>'required|string|max:100',
             'domicilio'=>'required|string|max:100',
+            'direccion'=>'required|string|max:100',
             'estadoCivil'=>'required|string|max:100',
             'finicioDocencia'=>'required|date',
             'titulo1'=>'required|string|max:300',
