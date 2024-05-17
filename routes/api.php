@@ -31,6 +31,9 @@ Route::middleware(['auth:sanctum'])->group(function(){
     Route::get('docentes/search/{value}',[DocenteController::class,'search'])->name('docentes.search');
 
     Route::apiResource('obligaciones',ObligacioneController::class);
+    
+    Route::get('obligaciones/docente/{id}',[ObligacioneController::class,'obligacionesDocente'])->name('obligaciones.obligacionesDocente');
+
     Route::apiResource('licencias',LicenciaController::class);
 });
 

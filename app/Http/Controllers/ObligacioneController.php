@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Obligacione;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ObligacioneController extends Controller
 {
@@ -12,7 +13,16 @@ class ObligacioneController extends Controller
      */
     public function index()
     {
-        $obligaciones=Obligacione::paginate(10);
+      $obligaciones=Obligacione::all();
+        return response()->json([
+            'state'=>true,
+            'data'=>$obligaciones
+        ],200);
+    }
+
+    public function obligacionesDocente($id){
+        $obligaciones= DB::table('obligaciones')->where('obligaciones.docente_id',$id)->join('docentes','obligaciones.docente_id','=','docentes.id')->join('cargos','obligaciones.cargo_id','=','cargos.id')->join('espacios','obligaciones.espacio_id','=','espacios.id')->join('cursos','espacios.curso_id','=','cursos.id')->select('obligaciones.id as id','obligaciones.caracter','obligaciones.turno','obligaciones.horas','obligaciones.division','cursos.curso','espacios.nombre as espacio','cargos.cargo','docentes.nombres','docentes.apellidos')->get();
+        
         return response()->json([
             'state'=>true,
             'data'=>$obligaciones
@@ -53,11 +63,13 @@ class ObligacioneController extends Controller
 
     public function show($id)
     {
-        $obligacion=Obligacione::findOrFail($id);
+     
+        $obligacion= DB::table('obligaciones')->where('obligaciones.id',$id)->join('docentes','obligaciones.docente_id','=','docentes.id')->join('cargos','obligaciones.cargo_id','=','cargos.id')->join('espacios','obligaciones.espacio_id','=','espacios.id')->join('cursos','espacios.curso_id','=','cursos.id')->select('obligaciones.id as id','obligaciones.caracter','obligaciones.turno','obligaciones.horas','obligaciones.dias','obligaciones.fechaAlta','obligaciones.origenVacante','obligaciones.expedienteAlta','obligaciones.numeroControl','obligaciones.cupof','obligaciones.observaciones','obligaciones.division','obligaciones.causaBaja','obligaciones.fechaBaja','obligaciones.expedienteBaja','docentes.apellidos','docentes.nombres','docentes.dni','cargos.cargo','espacios.nombre as espacio','cursos.curso')->get();
+      
         return response()->json([
             'state'=>true,
-            'data'=>$obligacion
-        ],200);
+            'data'=> $obligacion
+            ],200);
     
     }
 
