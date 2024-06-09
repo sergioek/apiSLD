@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Espacio;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class EspacioController extends Controller
 {
@@ -12,7 +13,9 @@ class EspacioController extends Controller
      */
     public function index()
     {
-        $espacios=Espacio::all();
+        $espacios=DB::table("espacios")->join("cursos","espacios.curso_id","=","cursos.id")->select("espacios.id as id","espacios.nombre","cursos.curso","cursos.ciclo","cursos.carrera")->get();
+
+
         return response()->json([
             'state'=>true,
             'data'=>$espacios

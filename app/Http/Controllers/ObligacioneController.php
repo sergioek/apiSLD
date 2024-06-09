@@ -21,7 +21,9 @@ class ObligacioneController extends Controller
     }
 
     public function obligacionesDocente($id){
-        $obligaciones= DB::table('obligaciones')->where('obligaciones.docente_id',$id)->join('docentes','obligaciones.docente_id','=','docentes.id')->join('cargos','obligaciones.cargo_id','=','cargos.id')->join('espacios','obligaciones.espacio_id','=','espacios.id')->join('cursos','espacios.curso_id','=','cursos.id')->select('obligaciones.id as id','obligaciones.caracter','obligaciones.turno','obligaciones.horas','obligaciones.division','cursos.curso','espacios.nombre as espacio','cargos.cargo','docentes.nombres','docentes.apellidos')->get();
+        
+        $obligaciones=Obligacione::where('docente_id',$id)->join('cargos','obligaciones.cargo_id','cargos.id')->select('obligaciones.id as id','cargos.cargo','obligaciones.caracter','obligaciones.turno','obligaciones.cupof','obligaciones.horas','obligaciones.docente_id')->get();
+        
         
         return response()->json([
             'state'=>true,
@@ -35,7 +37,7 @@ class ObligacioneController extends Controller
         $request->validate([
             'caracter'=>'required|string|max:10',
             'turno'=>'required|string|max:1',
-            'horas'=>'integer',
+            'horas'=>'nullable|integer',
             'dias'=>'required|json',
             'fechaAlta'=>'required|date',
             'origenVacante'=>'required|string|max:500',
@@ -43,13 +45,13 @@ class ObligacioneController extends Controller
             'numeroControl'=>'required|string|max:50',
             'cupof'=>'required|string|max:250',
             'observaciones'=>'string|max:500',
-            'division'=>'string|max:1',
-            'causaBaja'=>'string|max:100',
-            'fechaBaja'=>'date',
-            'expedienteBaja'=>'string|max:100',
+            'division'=>'nullable|string|max:1',
+            'causaBaja'=>'nullable|string|max:100',
+            'fechaBaja'=>'nullable|date',
+            'expedienteBaja'=>'nullable|string|max:100',
             'docente_id'=>'required|integer|exists:docentes,id',
             'cargo_id'=>'required|integer|exists:cargos,id',
-            'espacio_id'=>'integer|exists:espacios,id',
+            'espacio_id'=>'nullable|integer|exists:espacios,id',
         ]);
 
         Obligacione::create($request->all());
@@ -63,14 +65,23 @@ class ObligacioneController extends Controller
 
     public function show($id)
     {
-     
-        $obligacion= DB::table('obligaciones')->where('obligaciones.id',$id)->join('docentes','obligaciones.docente_id','=','docentes.id')->join('cargos','obligaciones.cargo_id','=','cargos.id')->join('espacios','obligaciones.espacio_id','=','espacios.id')->join('cursos','espacios.curso_id','=','cursos.id')->select('obligaciones.id as id','obligaciones.caracter','obligaciones.turno','obligaciones.horas','obligaciones.dias','obligaciones.fechaAlta','obligaciones.origenVacante','obligaciones.expedienteAlta','obligaciones.numeroControl','obligaciones.cupof','obligaciones.observaciones','obligaciones.division','obligaciones.causaBaja','obligaciones.fechaBaja','obligaciones.expedienteBaja','docentes.apellidos','docentes.nombres','docentes.dni','cargos.cargo','espacios.nombre as espacio','cursos.curso')->get();
+        //LeftJoin permite hacer una union de la tabla de la izquierda hacia la tabla de la derecha con valores nulos incluso
+        $obligacion= DB::table('obligaciones')->where('obligaciones.id',$id)->join('docentes','obligaciones.docente_id','=','docentes.id')->leftJoin('cargos','obligaciones.cargo_id','=','cargos.id')->leftJoin('espacios','obligaciones.espacio_id','=','espacios.id')->leftJoin('cursos','espacios.curso_id','=','cursos.id')->select('obligaciones.id as id','obligaciones.caracter','obligaciones.turno','obligaciones.horas','obligaciones.dias','obligaciones.fechaAlta','obligaciones.origenVacante','obligaciones.expedienteAlta','obligaciones.numeroControl','obligaciones.cupof','obligaciones.observaciones','obligaciones.division','obligaciones.causaBaja','obligaciones.fechaBaja','obligaciones.expedienteBaja','docentes.apellidos','docentes.nombres','docentes.dni','cargos.cargo','espacios.nombre as espacio','cursos.curso')->get();
       
         return response()->json([
             'state'=>true,
             'data'=> $obligacion
             ],200);
     
+    }
+
+    public function edit ($id){
+        $obligacion= DB::table('obligaciones')->where('obligaciones.id',$id)->join('docentes','obligaciones.docente_id','=','docentes.id')->leftJoin('cargos','obligaciones.cargo_id','=','cargos.id')->leftJoin('espacios','obligaciones.espacio_id','=','espacios.id')->select('obligaciones.docente_id','obligaciones.id as id','obligaciones.cargo_id','cargos.cargo','obligaciones.caracter','obligaciones.turno','obligaciones.division','obligaciones.espacio_id','espacios.nombre as espacio','obligaciones.horas','obligaciones.dias','obligaciones.origenVacante','obligaciones.fechaAlta','obligaciones.expedienteAlta','obligaciones.numeroControl','obligaciones.cupof','obligaciones.observaciones','obligaciones.causaBaja','obligaciones.fechaBaja','obligaciones.expedienteBaja')->get();
+
+        return response()->json([
+            'status'=>true,
+            'data'=> $obligacion
+        ],200);
     }
 
 
@@ -81,9 +92,7 @@ class ObligacioneController extends Controller
         $request->validate([
             'caracter'=>'required|string|max:10',
             'turno'=>'required|string|max:1',
-            'caracter'=>'required|string|max:10',
-            'turno'=>'required|string|max:1',
-            'horas'=>'integer',
+            'horas'=>'nullable|integer',
             'dias'=>'required|json',
             'fechaAlta'=>'required|date',
             'origenVacante'=>'required|string|max:500',
@@ -91,13 +100,13 @@ class ObligacioneController extends Controller
             'numeroControl'=>'required|string|max:50',
             'cupof'=>'required|string|max:250',
             'observaciones'=>'string|max:500',
-            'division'=>'string|max:1',
-            'causaBaja'=>'string|max:100',
-            'fechaBaja'=>'date',
-            'expedienteBaja'=>'string|max:100',
+            'division'=>'nullable|string|max:1',
+            'causaBaja'=>'nullable|string|max:100',
+            'fechaBaja'=>'nullable|date',
+            'expedienteBaja'=>'nullable|string|max:100',
             'docente_id'=>'required|integer|exists:docentes,id',
             'cargo_id'=>'required|integer|exists:cargos,id',
-            'espacio_id'=>'integer|exists:espacios,id',
+            'espacio_id'=>'nullable|integer|exists:espacios,id',
         ]);
 
         $obligacion->update($request->all());

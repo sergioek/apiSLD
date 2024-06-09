@@ -4,17 +4,33 @@ namespace App\Http\Controllers;
 
 use App\Models\Licencia;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class LicenciaController extends Controller
 {
    
-    public function index()
+    public function index($id)
     {
-        $licencias=Licencia::paginate(10);
+        $licencias=DB::table('licencias')->where('licencias.docente_id',$id)->join('articulos','licencias.articulo_id','articulos.id')->join('obligaciones','licencias.obligacione_id','obligaciones.id')->join('cargos','obligaciones.cargo_id','cargos.id')->select('licencias.*','licencias.id as id', 'articulos.articulo','articulos.denominacion','articulos.descuentoPresentismo','cargos.cargo','obligaciones.numeroControl','obligaciones.caracter')->get();
+
         return response()->json([
             'state'=>true,
             'data'=>$licencias
         ],200);
+
+
+    }
+
+    public function search ($idDocente,$desdeFecha,$hastaFecha){
+
+        $licencias=DB::table('licencias')->where('licencias.docente_id',$idDocente)->whereBetween('finicio',[$desdeFecha,$hastaFecha])->join('articulos','licencias.articulo_id','articulos.id')->join('obligaciones','licencias.obligacione_id','obligaciones.id')->join('cargos','obligaciones.cargo_id','cargos.id')->select('licencias.*','licencias.id as id', 'articulos.articulo','articulos.denominacion','articulos.descuentoPresentismo','cargos.cargo','obligaciones.numeroControl','obligaciones.caracter')->get();
+
+        return response()->json([
+            'state'=>true,
+            'data'=>$licencias
+        ],200);
+    
+
     }
 
    

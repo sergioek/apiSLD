@@ -169,5 +169,12 @@ class ArticuloSeeder extends Seeder
             'descuentoPresentismo'=>'NO'
         ]);
 
+        Articulo::create([
+            'articulo'=>'Injustificada',
+            'denominacion'=>'Falta Injustificada',
+            'descuentoPresentismo'=>'NO'
+        ]);
+
+
     }
 }

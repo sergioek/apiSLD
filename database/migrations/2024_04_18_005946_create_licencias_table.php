@@ -19,9 +19,12 @@ return new class extends Migration
             $table->integer('obligacionesAfectadas')->nullable();
             $table->enum('injustificada',['SI','NO']);
             $table->enum('documentacion',['Completa','Incompleta']);
+            $table->enum('totalHaberes',['100%','50%']);
+            $table->text('expediente')->nullable();
             $table->text('observaciones')->nullable();
             $table->foreignId('articulo_id')->constrained('articulos');
             $table->foreignId('obligacione_id')->constrained('obligaciones');
+            $table->foreignId('docente_id')->constrained('docentes');
             $table->timestamps();
         });
         

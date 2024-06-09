@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ArticuloController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CargoController;
 use App\Http\Controllers\DocenteController;
 use App\Http\Controllers\EspacioController;
 use App\Http\Controllers\LicenciaController;
@@ -27,6 +28,8 @@ Route::middleware('auth:sanctum')->post('logout', [AuthController::class, 'logou
 Route::middleware(['auth:sanctum'])->group(function(){
     Route::get('articulos',[ArticuloController::class,'index']);
     Route::get('espacios',[EspacioController::class,'index']);
+    Route::get('cargos',[CargoController::class,'index']);
+
     Route::apiResource('docentes',DocenteController::class);
     Route::get('docentes/search/{value}',[DocenteController::class,'search'])->name('docentes.search');
 
@@ -34,7 +37,15 @@ Route::middleware(['auth:sanctum'])->group(function(){
     
     Route::get('obligaciones/docente/{id}',[ObligacioneController::class,'obligacionesDocente'])->name('obligaciones.obligacionesDocente');
 
-    Route::apiResource('licencias',LicenciaController::class);
+    Route::get('obligaciones/edit/{id}',[ObligacioneController::class,'edit'])->name('obligaciones.edit');
+
+    
+    Route::get('licencias/{id}',[LicenciaController::class,'index'])->name('licencias.index');
+
+    Route::delete('licencias/{licencia}',[LicenciaController::class,'destroy'])->name('licencias.destroy');
+
+    Route::get('licencias/{idDocente}/{desdeFecha}/{hastaFecha}',[LicenciaController::class,'search'])->name('licencias.search');
+    
 });
 
 

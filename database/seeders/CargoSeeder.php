@@ -14,60 +14,59 @@ class CargoSeeder extends Seeder
     public function run(): void
     {
         Cargo::create([
-            'cargo'=>'Catedrático/a'
+            'cargo' => 'Asesor Pedagógico'
         ]);
-
-        Cargo::create([
-            'cargo'=>'Rector de 1ra'
-        ]);
-
-        Cargo::create([
-            'cargo'=>'Vicerrector de 1ra'
-        ]);
-
-        Cargo::create([
-            'cargo'=>'Asesor Pedagógico'
-        ]);
-
-        Cargo::create([
-            'cargo'=>'Secretario de 1ra'
-        ]);
-
         
         Cargo::create([
-            'cargo'=>'Jefe de Taller'
+            'cargo' => 'Auxiliar de Secretaría'
         ]);
-
+        
         Cargo::create([
-            'cargo'=>'Prosecretario de 1ra'
+            'cargo' => 'Ayudante de Trabajos Prácticos'
         ]);
-
+        
         Cargo::create([
-            'cargo'=>'Ayudante Técnico'
+            'cargo' => 'Ayudante Técnico'
         ]);
-
+        
         Cargo::create([
-            'cargo'=>'Encargado General de Control'
+            'cargo' => 'Bibliotecario'
         ]);
-
+        
         Cargo::create([
-            'cargo'=>'Bibliotecario'
+            'cargo' => 'Catedrático/a'
         ]);
-
+        
         Cargo::create([
-            'cargo'=>'Preceptor'
+            'cargo' => 'Encargado General de Control'
         ]);
-
+        
         Cargo::create([
-            'cargo'=>'MEP'
+            'cargo' => 'Jefe de Taller'
         ]);
-
+        
         Cargo::create([
-            'cargo'=>'Auxiliar de Secretaría'
+            'cargo' => 'MEP'
         ]);
-
+        
         Cargo::create([
-            'cargo'=>'Ayudante de Trabajos Prácticos'
+            'cargo' => 'Preceptor'
+        ]);
+        
+        Cargo::create([
+            'cargo' => 'Prosecretario de 1ra'
+        ]);
+        
+        Cargo::create([
+            'cargo' => 'Rector de 1ra'
+        ]);
+        
+        Cargo::create([
+            'cargo' => 'Secretario de 1ra'
+        ]);
+        
+        Cargo::create([
+            'cargo' => 'Vicerrector de 1ra'
         ]);
 
        

@@ -12,7 +12,12 @@ class CargoController extends Controller
      */
     public function index()
     {
-        //
+        $cargos = Cargo::all();
+
+        return response()->json([
+            "state"=>true,
+            "data"=>$cargos
+        ],200);
     }
 
     /**
