@@ -7,6 +7,7 @@ use App\Http\Controllers\DocenteController;
 use App\Http\Controllers\EspacioController;
 use App\Http\Controllers\LicenciaController;
 use App\Http\Controllers\ObligacioneController;
+use App\Http\Controllers\ReporteController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -45,7 +46,11 @@ Route::middleware(['auth:sanctum'])->group(function(){
     Route::delete('licencias/{licencia}',[LicenciaController::class,'destroy'])->name('licencias.destroy');
 
     Route::get('licencias/{idDocente}/{desdeFecha}/{hastaFecha}',[LicenciaController::class,'search'])->name('licencias.search');
-    
+
+    Route::post('licencias',[LicenciaController::class,'store'])->name('licencias.store');
+
+    Route::get('reporte/reporteLicencias/{fechaInicio}/{fechaFinal}',[ReporteController::class,'reporteLicencias'])->name('reporte.reporteLicencias');
+
 });
 
 

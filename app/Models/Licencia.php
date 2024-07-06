@@ -19,6 +19,9 @@ class Licencia extends Model
         'observaciones',
         'articulo_id',
         'obligacione_id',
+        'totalHaberes',
+        'docente_id',
+        'expediente'
     ];
 
     public function articulo(){

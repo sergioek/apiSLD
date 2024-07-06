@@ -11,7 +11,7 @@ class LicenciaController extends Controller
    
     public function index($id)
     {
-        $licencias=DB::table('licencias')->where('licencias.docente_id',$id)->join('articulos','licencias.articulo_id','articulos.id')->join('obligaciones','licencias.obligacione_id','obligaciones.id')->join('cargos','obligaciones.cargo_id','cargos.id')->select('licencias.*','licencias.id as id', 'articulos.articulo','articulos.denominacion','articulos.descuentoPresentismo','cargos.cargo','obligaciones.numeroControl','obligaciones.caracter')->get();
+        $licencias=DB::table('licencias')->where('licencias.docente_id',$id)->join('articulos','licencias.articulo_id','articulos.id')->join('obligaciones','licencias.obligacione_id','obligaciones.id')->join('cargos','obligaciones.cargo_id','cargos.id')->select('licencias.*','licencias.id as id', 'articulos.articulo','articulos.denominacion','articulos.descuentoPresentismo','cargos.cargo','obligaciones.numeroControl','obligaciones.caracter')->paginate(2);
 
         return response()->json([
             'state'=>true,
@@ -23,7 +23,7 @@ class LicenciaController extends Controller
 
     public function search ($idDocente,$desdeFecha,$hastaFecha){
 
-        $licencias=DB::table('licencias')->where('licencias.docente_id',$idDocente)->whereBetween('finicio',[$desdeFecha,$hastaFecha])->join('articulos','licencias.articulo_id','articulos.id')->join('obligaciones','licencias.obligacione_id','obligaciones.id')->join('cargos','obligaciones.cargo_id','cargos.id')->select('licencias.*','licencias.id as id', 'articulos.articulo','articulos.denominacion','articulos.descuentoPresentismo','cargos.cargo','obligaciones.numeroControl','obligaciones.caracter')->get();
+        $licencias=DB::table('licencias')->where('licencias.docente_id',$idDocente)->whereBetween('finicio',[$desdeFecha,$hastaFecha])->join('articulos','licencias.articulo_id','articulos.id')->join('obligaciones','licencias.obligacione_id','obligaciones.id')->join('cargos','obligaciones.cargo_id','cargos.id')->select('licencias.*','licencias.id as id', 'articulos.articulo','articulos.denominacion','articulos.descuentoPresentismo','cargos.cargo','obligaciones.numeroControl','obligaciones.caracter')->paginate(2);
 
         return response()->json([
             'state'=>true,
@@ -38,14 +38,17 @@ class LicenciaController extends Controller
     {
         $request->validate([
             'finicio'=>'required|date',
-            'ffinal'=>'date',
+            'ffinal'=>'required|date',
             'dias'=>'required|integer',
-            'obligacionesAfectadas'=>'integer',
+            'obligacionesAfectadas'=>'integer|nullable',
             'injustificada'=>'required|string',
             'documentacion'=>'required|string',
-            'observaciones'=>'string',
+            'totalHaberes'=>'required|string',
+            'observaciones'=>'string|nullable',
+            'expediente'=>'string|nullable',
             'articulo_id'=>'required|integer|exists:articulos,id',
             'obligacione_id'=>'required|integer|exists:obligaciones,id',
+            'docente_id'=>'required|integer|exists:docentes,id',
         ]);
 
         Licencia::create($request->all());
@@ -96,4 +99,6 @@ class LicenciaController extends Controller
             'state'=>true,
         ],200);
     }
+
+    
 }

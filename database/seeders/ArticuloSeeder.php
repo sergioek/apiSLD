@@ -32,7 +32,7 @@ class ArticuloSeeder extends Seeder
 
         Articulo::create([
             'articulo'=>'11°',
-            'denominacion'=>'Atencion de familiar enfermo',
+            'denominacion'=>'Atencion de familiar enfermo - Enfermedad de un familiar.',
             'descuentoPresentismo'=>'SI'
         ]);
 
