@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Docente;
 use Illuminate\Http\Request;
 use PhpParser\Comment\Doc;
-
+use Illuminate\Support\Facades\DB;
 class DocenteController extends Controller
 {
    
     public function index()
     {
         $docentes=Docente::orderBy('apellidos','ASC')->paginate(8);
+
         return response()->json([
             'state'=>true,
             'data'=>$docentes,
