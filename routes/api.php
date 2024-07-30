@@ -49,11 +49,11 @@ Route::middleware(['auth:sanctum'])->group(function(){
 
     Route::post('licencias',[LicenciaController::class,'store'])->name('licencias.store');
 
-    
+    Route::get('reporte/reporteLicencias/{fechaInicio}/{fechaFinal}',[ReporteController::class,'reporteLicencias'])->name('reporte.reporteLicencias');  
 
 });
 
-    Route::get('reporte/reporteLicencias/{fechaInicio}/{fechaFinal}',[ReporteController::class,'reporteLicencias'])->name('reporte.reporteLicencias');
+  
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     
