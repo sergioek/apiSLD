@@ -12,7 +12,7 @@
         table {
             width: 100%;
             border-collapse: collapse;
-         
+
         }
 
         th,
@@ -48,13 +48,7 @@
             font-size: 20px;
         }
 
-        .firmas {
-            height: 140px;
-            vertical-align:bottom;
-            border: none;
-           
-              
-        }
+
 
         .center {
             text-align: center;
@@ -113,6 +107,13 @@
 
         tbody{
             display: table-row-group;
+        
+        }
+
+        .firmas {
+            height: 140px;
+            vertical-align:bottom;
+            border: none !important;   
         }
     </style>
 
