@@ -24,10 +24,11 @@ class ArticuloSeeder extends Seeder
             'denominacion'=>'Enfermedad grave',
             'descuentoPresentismo'=>'SI'
         ]);
+
         Articulo::create([
             'articulo'=>'10°',
             'denominacion'=>'Accidente de trabajo',
-            'descuentoPresentismo'=>'SI'
+            'descuentoPresentismo'=>'NO'
         ]);
 
         Articulo::create([
@@ -39,43 +40,43 @@ class ArticuloSeeder extends Seeder
         Articulo::create([
             'articulo'=>'12°',
             'denominacion'=>'Aislamiento',
-            'descuentoPresentismo'=>'SI'
+            'descuentoPresentismo'=>'NO'
         ]);
 
         Articulo::create([
             'articulo'=>'14°a',
             'denominacion'=>'Parto simple con nacimiento a término de niño normal',
-            'descuentoPresentismo'=>'SI'
+            'descuentoPresentismo'=>'NO'
         ]);
 
         Articulo::create([
             'articulo'=>'14°b',
             'denominacion'=>'Nacimiento múltiple a término de niños normales',
-            'descuentoPresentismo'=>'SI'
+            'descuentoPresentismo'=>'NO'
         ]);
 
         Articulo::create([
             'articulo'=>'14°c',
             'denominacion'=>'Nacimiento múltiple de niños normales prematuros',
-            'descuentoPresentismo'=>'SI'
+            'descuentoPresentismo'=>'NO'
         ]);
 
         Articulo::create([
             'articulo'=>'14°d',
             'denominacion'=>'Nacimiento de niño prematuro normal',
-            'descuentoPresentismo'=>'SI'
+            'descuentoPresentismo'=>'NO'
         ]);
 
         Articulo::create([
             'articulo'=>'15°',
             'denominacion'=>'Franquicia por Atención y Alimentación de Hijo',
-            'descuentoPresentismo'=>'SI'
+            'descuentoPresentismo'=>'NO'
         ]);
 
         Articulo::create([
             'articulo'=>'16°',
             'denominacion'=>'Nacimiento de Hijo del Docente Varón',
-            'descuentoPresentismo'=>'SI'
+            'descuentoPresentismo'=>'NO'
         ]);
 
         Articulo::create([
@@ -87,13 +88,13 @@ class ArticuloSeeder extends Seeder
         Articulo::create([
             'articulo'=>'18°',
             'denominacion'=>'Cambio de estado',
-            'descuentoPresentismo'=>'SI'
+            'descuentoPresentismo'=>'NO'
         ]);
 
         Articulo::create([
             'articulo'=>'20°',
             'denominacion'=>'Duelo',
-            'descuentoPresentismo'=>'SI'
+            'descuentoPresentismo'=>'NO'
         ]);
 
         Articulo::create([
@@ -105,7 +106,7 @@ class ArticuloSeeder extends Seeder
         Articulo::create([
             'articulo'=>'22°',
             'denominacion'=>'Actividades de interes publico',
-            'descuentoPresentismo'=>'SI'
+            'descuentoPresentismo'=>'NO'
         ]);
 
         Articulo::create([
@@ -117,7 +118,7 @@ class ArticuloSeeder extends Seeder
         Articulo::create([
             'articulo'=>'27°',
             'denominacion'=>'Licencia por representación política',
-            'descuentoPresentismo'=>'SI'
+            'descuentoPresentismo'=>'NO'
         ]);
 
         Articulo::create([

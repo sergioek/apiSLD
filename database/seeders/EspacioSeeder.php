@@ -492,7 +492,7 @@ Espacio::create([
 ]);
 
 Espacio::create([
-    'nombre'=>'Formación Ética y Ciudadana',
+    'nombre'=>'Formación Ética Profesional',
    
     'curso_id'=>6,
     
