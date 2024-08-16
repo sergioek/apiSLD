@@ -22,7 +22,7 @@ class ObligacioneController extends Controller
 
     public function obligacionesDocente($id){
         
-        $obligaciones=Obligacione::where('docente_id',$id)->join('cargos','obligaciones.cargo_id','cargos.id')->select('obligaciones.id as id','cargos.cargo','obligaciones.caracter','obligaciones.turno','obligaciones.cupof','obligaciones.horas','obligaciones.docente_id')->get();
+        $obligaciones=Obligacione::where('docente_id',$id)->join('cargos','obligaciones.cargo_id','cargos.id')->leftjoin('espacios','obligaciones.espacio_id','espacios.id')->leftjoin('cursos','espacios.curso_id','cursos.id')->select('obligaciones.id as id','cargos.cargo','espacios.nombre as espacio','obligaciones.caracter','obligaciones.turno','obligaciones.cupof','obligaciones.horas','obligaciones.division','cursos.curso','obligaciones.docente_id')->get();
         
         
         return response()->json([
@@ -41,14 +41,14 @@ class ObligacioneController extends Controller
             'dias'=>'required|json',
             'fechaAlta'=>'required|date',
             'origenVacante'=>'required|string|max:500',
-            'expedienteAlta'=>'required|string|max:100',
+            'expedienteAlta'=>'required|string|max:500',
             'numeroControl'=>'required|string|max:50',
             'cupof'=>'required|string|max:250',
             'observaciones'=>'string|max:500',
             'division'=>'nullable|string|max:1',
-            'causaBaja'=>'nullable|string|max:100',
+            'causaBaja'=>'nullable|string|max:500',
             'fechaBaja'=>'nullable|date',
-            'expedienteBaja'=>'nullable|string|max:100',
+            'expedienteBaja'=>'nullable|string|max:500',
             'docente_id'=>'required|integer|exists:docentes,id',
             'cargo_id'=>'required|integer|exists:cargos,id',
             'espacio_id'=>'nullable|integer|exists:espacios,id',
@@ -96,14 +96,14 @@ class ObligacioneController extends Controller
             'dias'=>'required|json',
             'fechaAlta'=>'required|date',
             'origenVacante'=>'required|string|max:500',
-            'expedienteAlta'=>'required|string|max:100',
+            'expedienteAlta'=>'required|string|max:500',
             'numeroControl'=>'required|string|max:50',
             'cupof'=>'required|string|max:250',
             'observaciones'=>'string|max:500',
             'division'=>'nullable|string|max:1',
             'causaBaja'=>'nullable|string|max:100',
             'fechaBaja'=>'nullable|date',
-            'expedienteBaja'=>'nullable|string|max:100',
+            'expedienteBaja'=>'nullable|string|max:500',
             'docente_id'=>'required|integer|exists:docentes,id',
             'cargo_id'=>'required|integer|exists:cargos,id',
             'espacio_id'=>'nullable|integer|exists:espacios,id',

@@ -11,7 +11,7 @@ class DocenteController extends Controller
    
     public function index()
     {
-        $docentes=Docente::orderBy('apellidos','ASC')->paginate(8);
+        $docentes=Docente::orderBy('apellidos','ASC')->paginate(14);
 
         return response()->json([
             'state'=>true,
@@ -20,7 +20,7 @@ class DocenteController extends Controller
     }
 
     public function search($value){
-        $docentes=Docente::where('apellidos','like','%'.$value.'%')->orWhere('nombres','like','%'.$value.'%')->orWhere('dni','like','%'.$value.'%')->paginate(8);
+        $docentes=Docente::where('apellidos','like','%'.$value.'%')->orWhere('nombres','like','%'.$value.'%')->orWhere('dni','like','%'.$value.'%')->paginate(14);
         
         return response()->json([
             'state'=>true,
